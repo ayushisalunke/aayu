@@ -1,5 +1,0 @@
-cmd command to git 
-step1:- git status
-step2:- git add .
-step3:- git commit -m"" {"Ayushi Project" name of project}
-step4:- git push -u origin main
