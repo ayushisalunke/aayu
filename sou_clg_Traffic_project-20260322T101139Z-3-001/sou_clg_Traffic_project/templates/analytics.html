@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ================= PERFORMANCE HEADER ================= -->
+<div class="mb-5 text-center" data-aos="fade-up">
+    <h2 style="font-family:'Orbitron', sans-serif; color:#00c6ff;">
+        AI Performance Monitoring Panel
+    </h2>
+    <p style="opacity:0.7;">
+        Engineering Overview of Model Training & Evaluation Metrics
+    </p>
+</div>
+
+
+<!-- ================= METRIC CARDS ================= -->
+<div class="row mb-5">
+
+    <div class="col-md-3" data-aos="zoom-in">
+        <div class="card card-custom stat-card">
+            <i class="fas fa-chart-line fa-2x mb-3" style="color:#00ff99;"></i>
+            <h6>Training Accuracy</h6>
+            <h3 style="color:#00ff99;">98%</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card card-custom stat-card">
+            <i class="fas fa-check-circle fa-2x mb-3" style="color:#00c6ff;"></i>
+            <h6>Validation Accuracy</h6>
+            <h3 style="color:#00c6ff;">96%</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+        <div class="card card-custom stat-card">
+            <i class="fas fa-wave-square fa-2x mb-3" style="color:#ffcc00;"></i>
+            <h6>Loss Function</h6>
+            <h3 style="font-size:1rem;">Categorical Crossentropy</h3>
+        </div>
+    </div>
+
+    <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+        <div class="card card-custom stat-card">
+            <i class="fas fa-cogs fa-2x mb-3" style="color:#ff6b6b;"></i>
+            <h6>Optimizer</h6>
+            <h3>Adam</h3>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ================= GRAPHS SECTION ================= -->
+<div class="row">
+
+    <!-- Accuracy Graph -->
+    <div class="col-md-6" data-aos="fade-right">
+        <div class="card card-custom p-4">
+
+            <h5 class="mb-4">
+                <i class="fas fa-chart-area me-2"></i>
+                Training vs Validation Accuracy
+            </h5>
+
+            <img src="{{ url_for('static', filename='images/accuracy_graph.png') }}"
+                 class="img-fluid rounded"
+                 style="border:1px solid rgba(255,255,255,0.1);">
+
+        </div>
+    </div>
+
+
+    <!-- Confusion Matrix -->
+    <div class="col-md-6" data-aos="fade-left">
+        <div class="card card-custom p-4">
+
+            <h5 class="mb-4">
+                <i class="fas fa-th me-2"></i>
+                Confusion Matrix Analysis
+            </h5>
+
+            <img src="{{ url_for('static', filename='images/confusion_matrix.png') }}"
+                 class="img-fluid rounded"
+                 style="border:1px solid rgba(255,255,255,0.1);">
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER NOTE ================= -->
+<div class="mt-5 text-center" data-aos="fade-up">
+    <p style="opacity:0.6; font-size:0.9rem;">
+        Model evaluated on multi-class traffic sign dataset using deep transfer learning architecture.
+    </p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ================= PAGE HEADER ================= -->
+<div class="mb-5 text-center" data-aos="fade-up">
+    <h2 style="font-family:'Orbitron', sans-serif; color:#00c6ff;">
+        System Documentation
+    </h2>
+    <p style="opacity:0.7;">
+        AI-Based Traffic Sign Recognition & Driver Assistance System
+    </p>
+</div>
+
+
+<!-- ================= PROJECT OVERVIEW ================= -->
+<div class="card card-custom p-5 mb-4" data-aos="fade-up">
+
+    <h4 class="mb-3">
+        <i class="fas fa-project-diagram me-2"></i>
+        Project Overview
+    </h4>
+
+    <p style="opacity:0.85;">
+        This MCA major project presents an AI-driven Traffic Sign Recognition System 
+        designed to simulate a driver assistance interface for intelligent transportation environments.
+    </p>
+
+    <p style="opacity:0.85;">
+        The system classifies 43 distinct road sign categories using a deep transfer learning architecture 
+        and provides real-time visual feedback through a modern dashboard interface.
+    </p>
+
+</div>
+
+
+<!-- ================= TECHNICAL ARCHITECTURE ================= -->
+<div class="card card-custom p-5 mb-4" data-aos="fade-up">
+
+    <h4 class="mb-4">
+        <i class="fas fa-cogs me-2"></i>
+        Technical Architecture
+    </h4>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <ul style="line-height:2;">
+                <li><strong>Model Architecture:</strong> EfficientNet</li>
+                <li><strong>Framework:</strong> TensorFlow / Keras</li>
+                <li><strong>Loss Function:</strong> Categorical Crossentropy</li>
+                <li><strong>Optimizer:</strong> Adam</li>
+                <li><strong>Input Resolution:</strong> 224 × 224</li>
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <ul style="line-height:2;">
+                <li><strong>Backend:</strong> Flask (Python)</li>
+                <li><strong>Frontend:</strong> Bootstrap + Custom Dark UI</li>
+                <li><strong>Deployment:</strong> Web-based Interface</li>
+                <li><strong>Dataset:</strong> Multi-class Traffic Sign Dataset</li>
+                <li><strong>Total Classes:</strong> 43</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SYSTEM PURPOSE ================= -->
+<div class="card card-custom p-5" data-aos="fade-up">
+
+    <h4 class="mb-3">
+        <i class="fas fa-car me-2"></i>
+        System Purpose
+    </h4>
+
+    <p style="opacity:0.85;">
+        The primary objective of this system is to demonstrate how deep learning models 
+        can be integrated into intelligent driver assistance systems (ADAS) to enhance 
+        road safety and automated vehicle awareness.
+    </p>
+
+    <p style="opacity:0.85;">
+        This interface simulates an in-vehicle AI dashboard where road sign detection 
+        events are visualized in a structured and user-friendly manner.
+    </p>
+
+</div>
+
+{% endblock %}
