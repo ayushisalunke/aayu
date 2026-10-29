@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS phishing_db;
 USE phishing_db;
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
@@ -16,17 +16,8 @@ CREATE TABLE history (
         REFERENCES users(user_id)
         ON DELETE CASCADE
 );
-
-
-SHOW TABLES;
-
-DESCRIBE users;
-
-DESCRIBE history;
-
-SELECT * from users;
-
-ALTER TABLE users
-DROP COLUMN email;
-
     
+select * from users;
+
+
+

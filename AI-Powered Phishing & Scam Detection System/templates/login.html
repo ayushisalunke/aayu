@@ -50,6 +50,7 @@
                         <a href="{{ url_for('history') }}" class="nav-item nav-link">History</a>
                         <a href="{{ url_for('result') }}" class="nav-item nav-link">Result</a>
                         <a href="{{ url_for('login') }}" class="nav-item nav-link active">Login</a>
+                        <a href="{{ url_for('admin_login') }}" class="nav-item nav-link text-warning"><i class="fas fa-shield-alt me-1"></i>Admin</a>
                     </div>
                 </div>
             </nav>
@@ -63,6 +64,16 @@
                 <div class="col-lg-6 align-self-center text-center text-lg-start mb-lg-5">
                     <section class="signin-section">
                         <div class="form-container">
+
+                             <!-- Display Flask success/error messages -->
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                    {% for category, message in messages %}
+                                        <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endwith %}
+                                
                             <form method="POST">
                                 <div class="form-group">
                                     <label>Username</label>
@@ -80,6 +91,13 @@
                             <div class="form-footer">
                                 Don't have an account?
                                 <a href="{{ url_for('reg') }}">Create Account</a>
+                            </div>
+
+                            <div class="text-center mt-3 pt-3 border-top">
+                                <span class="text-muted small">System Administrator?</span>
+                                <a href="{{ url_for('admin_login') }}" class="small fw-bold text-danger ms-1 text-decoration-none">
+                                    <i class="fas fa-user-shield me-1"></i>Admin Login
+                                </a>
                             </div>
                         </div>
                     </section>
