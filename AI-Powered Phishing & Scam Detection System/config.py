@@ -68,7 +68,8 @@ def _init_sqlite_tables(conn):
         CREATE TABLE IF NOT EXISTS users (
             user_id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL
+            password TEXT NOT NULL,
+            email TEXT
         )
     """)
     cur.execute("""

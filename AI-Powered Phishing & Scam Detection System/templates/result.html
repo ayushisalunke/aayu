@@ -13,7 +13,8 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Ubuntu:wght@500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -224,8 +225,6 @@
                         <a href="{{ url_for('index') }}" class="nav-item nav-link">Home</a>
                         <a href="{{ url_for('history') }}" class="nav-item nav-link">History</a>
                         <a href="{{ url_for('result') }}" class="nav-item nav-link active">Result</a>
-                        <a href="{{ url_for('login') }}" class="nav-item nav-link">Login</a>
-                        <a href="{{ url_for('admin_login') }}" class="nav-item nav-link text-warning"><i class="fas fa-shield-alt me-1"></i> Admin</a>
                     </div>
                 </div>
             </nav>
@@ -245,11 +244,13 @@
                         Phishing &amp; Scam Detection Engine
                     </h1>
                     <p class="text-white-50 lead mb-4 animated slideInRight">
-                        Submit any web link, domain name, or message URL for automated heuristic, Lexical analysis, and machine learning risk scoring.
+                        Submit any web link, domain name, or message URL for automated heuristic, Lexical analysis, and
+                        machine learning risk scoring.
                     </p>
                 </div>
                 <div class="col-lg-5 align-self-end text-center text-lg-end">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/hero-img.png') }}" alt="PhishGuard Scan" style="max-height: 280px;">
+                    <img class="img-fluid" src="{{ url_for('static', filename='img/hero-img.png') }}"
+                        alt="PhishGuard Scan" style="max-height: 280px;">
                 </div>
             </div>
         </div>
@@ -266,7 +267,8 @@
                             <h4 class="fw-bold mb-1" style="color: #0A2A66;">
                                 <i class="fas fa-radar text-primary me-2"></i>Analyze Suspicious URL / Link
                             </h4>
-                            <p class="text-muted small mb-0">Enter a complete web address (e.g., https://secure-bank-login.xyz/auth)</p>
+                            <p class="text-muted small mb-0">Enter a complete web address (e.g.,
+                                https://secure-bank-login.xyz/auth)</p>
                         </div>
                         <span class="badge bg-light text-primary border px-3 py-2">
                             <i class="fas fa-microchip me-1"></i> Model: Gradient Boosted Heuristic
@@ -277,9 +279,9 @@
                     <form action="{{ url_for('result') }}" method="POST" id="scanForm">
                         <div class="url-input-box mb-2">
                             <i class="fas fa-globe"></i>
-                            <input type="text" id="targetUrlInput" name="url" class="form-control" 
-                                   placeholder="https://example.com/login or paste unknown link" 
-                                   value="{{ scanned_url if scanned_url else '' }}" required>
+                            <input type="text" id="targetUrlInput" name="url" class="form-control"
+                                placeholder="https://example.com/login or paste unknown link"
+                                value="{{ scanned_url if scanned_url else '' }}" required>
                             <button class="btn-scan" type="submit" id="scanBtn">
                                 <i class="fas fa-shield-alt"></i> <span>Scan Now</span>
                             </button>
@@ -291,11 +293,15 @@
                             <span class="sample-chip" onclick="setSampleUrl('https://google.com')">
                                 <i class="fas fa-check-circle text-success me-1"></i> google.com (Safe)
                             </span>
-                            <span class="sample-chip" onclick="setSampleUrl('http://paypal-verification-account-update.info/login')">
-                                <i class="fas fa-exclamation-triangle text-warning me-1"></i> paypal-verification.info (Suspicious)
+                            <span class="sample-chip"
+                                onclick="setSampleUrl('http://paypal-verification-account-update.info/login')">
+                                <i class="fas fa-exclamation-triangle text-warning me-1"></i> paypal-verification.info
+                                (Suspicious)
                             </span>
-                            <span class="sample-chip" onclick="setSampleUrl('http://apple-id-suspended-security-check.ru/account.php')">
-                                <i class="fas fa-skull-crossbones text-danger me-1"></i> apple-id-suspended.ru (Phishing)
+                            <span class="sample-chip"
+                                onclick="setSampleUrl('http://apple-id-suspended-security-check.ru/account.php')">
+                                <i class="fas fa-skull-crossbones text-danger me-1"></i> apple-id-suspended.ru
+                                (Phishing)
                             </span>
                         </div>
                     </form>
@@ -303,109 +309,117 @@
                     <!-- Scan Result Output Display -->
                     <div id="resultsWrapper">
                         {% if result %}
-                            <!-- Server Rendered Result if provided by backend -->
-                            {% set res_str = (result|string)|lower %}
-                            {% set is_safe = ('safe' in res_str) or ('clean' in res_str) %}
-                            {% set is_phish = ('phish' in res_str) or ('danger' in res_str) or ('malicious' in res_str) %}
-                            
-                            <div class="result-card-display {{ 'result-safe' if is_safe else ('result-phishing' if is_phish else 'result-suspicious') }}">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3 text-center">
-                                        <div class="result-icon-badge {{ 'badge-safe' if is_safe else ('badge-phishing' if is_phish else 'badge-suspicious') }}">
-                                            {% if is_safe %}
-                                                <i class="fas fa-check"></i>
-                                            {% elif is_phish %}
-                                                <i class="fas fa-shield-virus"></i>
-                                            {% else %}
-                                                <i class="fas fa-exclamation-triangle"></i>
-                                            {% endif %}
-                                        </div>
-                                        <h5 class="fw-bold mb-0">
-                                            {% if is_safe %}
-                                                SAFE LINK
-                                            {% elif is_phish %}
-                                                PHISHING DETECTED
-                                            {% else %}
-                                                SUSPICIOUS DOMAIN
-                                            {% endif %}
-                                        </h5>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h4 class="fw-bold mb-2">Detection Result Verdict</h4>
-                                        <p class="lead mb-3" style="font-size: 16px;">{{ result }}</p>
+                        <!-- Server Rendered Result if provided by backend -->
+                        {% set res_str = (result|string)|lower %}
+                        {% set is_safe = ('safe' in res_str) or ('clean' in res_str) %}
+                        {% set is_phish = ('phish' in res_str) or ('danger' in res_str) or ('malicious' in res_str) %}
 
-                                        {% if scanned_url %}
-                                            <p class="small text-muted mb-2">
-                                                <strong>Scanned URL:</strong> <code>{{ scanned_url }}</code>
-                                            </p>
+                        <div
+                            class="result-card-display {{ 'result-safe' if is_safe else ('result-phishing' if is_phish else 'result-suspicious') }}">
+                            <div class="row align-items-center">
+                                <div class="col-md-3 text-center">
+                                    <div
+                                        class="result-icon-badge {{ 'badge-safe' if is_safe else ('badge-phishing' if is_phish else 'badge-suspicious') }}">
+                                        {% if is_safe %}
+                                        <i class="fas fa-check"></i>
+                                        {% elif is_phish %}
+                                        <i class="fas fa-shield-virus"></i>
+                                        {% else %}
+                                        <i class="fas fa-exclamation-triangle"></i>
                                         {% endif %}
+                                    </div>
+                                    <h5 class="fw-bold mb-0">
+                                        {% if is_safe %}
+                                        SAFE LINK
+                                        {% elif is_phish %}
+                                        PHISHING DETECTED
+                                        {% else %}
+                                        SUSPICIOUS DOMAIN
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                                <div class="col-md-9">
+                                    <h4 class="fw-bold mb-2">Detection Result Verdict</h4>
+                                    <p class="lead mb-3" style="font-size: 16px;">{{ result }}</p>
 
-                                        <div class="row g-2 mt-2">
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num text-{{ 'success' if is_safe else ('danger' if is_phish else 'warning') }}">
-                                                        {{ '4%' if is_safe else ('96%' if is_phish else '58%') }}
-                                                    </div>
-                                                    <div class="metric-label">Risk Probability</div>
+                                    {% if scanned_url %}
+                                    <p class="small text-muted mb-2">
+                                        <strong>Scanned URL:</strong> <code>{{ scanned_url }}</code>
+                                    </p>
+                                    {% endif %}
+
+                                    <div class="row g-2 mt-2">
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div
+                                                    class="metric-num text-{{ 'success' if is_safe else ('danger' if is_phish else 'warning') }}">
+                                                    {{ '4%' if is_safe else ('96%' if is_phish else '58%') }}
                                                 </div>
+                                                <div class="metric-label">Risk Probability</div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num">TLS/SSL</div>
-                                                    <div class="metric-label">{{ 'Valid Certificate' if is_safe else 'Untrusted / Missing' }}</div>
-                                                </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div class="metric-num">TLS/SSL</div>
+                                                <div class="metric-label">{{ 'Valid Certificate' if is_safe else
+                                                    'Untrusted / Missing' }}</div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num">Engine Status</div>
-                                                    <div class="metric-label">ML Inference Complete</div>
-                                                </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div class="metric-num">Engine Status</div>
+                                                <div class="metric-label">ML Inference Complete</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         {% else %}
-                            <!-- Default Interactive State (Live client preview / placeholder) -->
-                            <div id="clientResultPreview" class="result-card-display result-safe mt-4" style="display: none;">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3 text-center">
-                                        <div class="result-icon-badge badge-safe" id="verdictBadge">
-                                            <i class="fas fa-check" id="verdictIcon"></i>
-                                        </div>
-                                        <h5 class="fw-bold mb-0" id="verdictTitle">SAFE LINK</h5>
+                        <!-- Default Interactive State (Live client preview / placeholder) -->
+                        <div id="clientResultPreview" class="result-card-display result-safe mt-4"
+                            style="display: none;">
+                            <div class="row align-items-center">
+                                <div class="col-md-3 text-center">
+                                    <div class="result-icon-badge badge-safe" id="verdictBadge">
+                                        <i class="fas fa-check" id="verdictIcon"></i>
                                     </div>
-                                    <div class="col-md-9">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h4 class="fw-bold mb-2">Scan Analysis Breakdown</h4>
-                                            <span class="badge bg-primary" id="verdictTimestamp">Just now</span>
-                                        </div>
-                                        <p class="mb-2" id="verdictDesc">The URL does not exhibit common lexical deception, homoglyph character substitutions, or blacklisted scam signatures.</p>
-                                        <p class="small mb-3"><strong>Target:</strong> <code id="verdictUrl">https://example.com</code></p>
+                                    <h5 class="fw-bold mb-0" id="verdictTitle">SAFE LINK</h5>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold mb-2">Scan Analysis Breakdown</h4>
+                                        <span class="badge bg-primary" id="verdictTimestamp">Just now</span>
+                                    </div>
+                                    <p class="mb-2" id="verdictDesc">The URL does not exhibit common lexical deception,
+                                        homoglyph character substitutions, or blacklisted scam signatures.</p>
+                                    <p class="small mb-3"><strong>Target:</strong> <code
+                                            id="verdictUrl">https://example.com</code></p>
 
-                                        <div class="row g-2 mt-2">
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num" id="verdictScore">8%</div>
-                                                    <div class="metric-label">Risk Index</div>
-                                                </div>
+                                    <div class="row g-2 mt-2">
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div class="metric-num" id="verdictScore">8%</div>
+                                                <div class="metric-label">Risk Index</div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num" id="verdictDomainAge">3+ Years</div>
-                                                    <div class="metric-label">Domain Reputation</div>
-                                                </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div class="metric-num" id="verdictDomainAge">3+ Years</div>
+                                                <div class="metric-label">Domain Reputation</div>
                                             </div>
-                                            <div class="col-sm-4">
-                                                <div class="metric-tile">
-                                                    <div class="metric-num text-success" id="verdictStatus">Action: Proceed</div>
-                                                    <div class="metric-label">Recommended Step</div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="metric-tile">
+                                                <div class="metric-num text-success" id="verdictStatus">Action: Proceed
                                                 </div>
+                                                <div class="metric-label">Recommended Step</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         {% endif %}
                     </div>
 
@@ -425,12 +439,16 @@
                     </div>
                     <h2 class="mb-4 fw-bold" style="color: #0A2A66;">Comprehensive AI Threat Analysis</h2>
                     <p class="mb-3 text-muted">
-                        Our intelligent security engine leverages a hybrid detection approach combining Lexical Feature Extraction, Domain Age verification, and Machine Learning trained on known attack corpuses.
+                        Our intelligent security engine leverages a hybrid detection approach combining Lexical Feature
+                        Extraction, Domain Age verification, and Machine Learning trained on known attack corpuses.
                     </p>
                     <ul class="list-unstyled mb-4">
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Zero-Day Scam Detection:</strong> Identifies typosquatting &amp; sub-domain masking.</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Real-Time Heuristics:</strong> Inspects URL length, token entropy, and symbol counts.</li>
-                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Reputation Cross-Check:</strong> Verifies domain whois patterns and SSL cert details.</li>
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Zero-Day Scam
+                                Detection:</strong> Identifies typosquatting &amp; sub-domain masking.</li>
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Real-Time
+                                Heuristics:</strong> Inspects URL length, token entropy, and symbol counts.</li>
+                        <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> <strong>Reputation
+                                Cross-Check:</strong> Verifies domain whois patterns and SSL cert details.</li>
                     </ul>
                 </div>
 
@@ -438,50 +456,63 @@
                     <div class="row g-4">
                         <!-- Safe Card -->
                         <div class="col-md-6">
-                            <div class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-success border-3">
-                                <div class="mx-auto mb-3" style="width: 50px; height: 50px; border-radius: 50%; background: #dcfce7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                            <div
+                                class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-success border-3">
+                                <div class="mx-auto mb-3"
+                                    style="width: 50px; height: 50px; border-radius: 50%; background: #dcfce7; color: #166534; display: flex; align-items: center; justify-content: center; font-size: 22px;">
                                     <i class="fas fa-shield-alt"></i>
                                 </div>
                                 <span class="category-pill bg-success text-white mb-2 mx-auto">CATEGORY 01</span>
                                 <h5 class="mb-2 fw-bold">Safe &amp; Legitimate</h5>
-                                <p class="text-muted small mb-0">Clean domain with verified registrar history, authentic SSL encryption, and absence of deceptive keywords.</p>
+                                <p class="text-muted small mb-0">Clean domain with verified registrar history, authentic
+                                    SSL encryption, and absence of deceptive keywords.</p>
                             </div>
                         </div>
 
                         <!-- Suspicious Card -->
                         <div class="col-md-6">
-                            <div class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-warning border-3">
-                                <div class="mx-auto mb-3" style="width: 50px; height: 50px; border-radius: 50%; background: #fef3c7; color: #854d0e; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                            <div
+                                class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-warning border-3">
+                                <div class="mx-auto mb-3"
+                                    style="width: 50px; height: 50px; border-radius: 50%; background: #fef3c7; color: #854d0e; display: flex; align-items: center; justify-content: center; font-size: 22px;">
                                     <i class="fas fa-exclamation-triangle"></i>
                                 </div>
                                 <span class="category-pill bg-warning text-dark mb-2 mx-auto">CATEGORY 02</span>
                                 <h5 class="mb-2 fw-bold">Suspicious / Caution</h5>
-                                <p class="text-muted small mb-0">Newly registered domains, unordinary IP redirections, or unusual top-level domain combinations.</p>
+                                <p class="text-muted small mb-0">Newly registered domains, unordinary IP redirections,
+                                    or unusual top-level domain combinations.</p>
                             </div>
                         </div>
 
                         <!-- Phishing Card -->
                         <div class="col-md-6">
-                            <div class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-danger border-3">
-                                <div class="mx-auto mb-3" style="width: 50px; height: 50px; border-radius: 50%; background: #fee2e2; color: #991b1b; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                            <div
+                                class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-danger border-3">
+                                <div class="mx-auto mb-3"
+                                    style="width: 50px; height: 50px; border-radius: 50%; background: #fee2e2; color: #991b1b; display: flex; align-items: center; justify-content: center; font-size: 22px;">
                                     <i class="fas fa-skull-crossbones"></i>
                                 </div>
                                 <span class="category-pill bg-danger text-white mb-2 mx-auto">CATEGORY 03</span>
                                 <h5 class="mb-2 fw-bold">Malicious Phishing</h5>
-                                <p class="text-muted small mb-0">Impersonation of banking, crypto, or enterprise login services designed to hijack passwords and credentials.</p>
+                                <p class="text-muted small mb-0">Impersonation of banking, crypto, or enterprise login
+                                    services designed to hijack passwords and credentials.</p>
                             </div>
                         </div>
 
                         <!-- Enterprise SOC Card -->
                         <div class="col-md-6">
-                            <div class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-primary border-3">
-                                <div class="mx-auto mb-3" style="width: 50px; height: 50px; border-radius: 50%; background: #dbeafe; color: #1e40af; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+                            <div
+                                class="service-item bg-white p-4 d-flex flex-column justify-content-center text-center rounded shadow-sm border-top border-primary border-3">
+                                <div class="mx-auto mb-3"
+                                    style="width: 50px; height: 50px; border-radius: 50%; background: #dbeafe; color: #1e40af; display: flex; align-items: center; justify-content: center; font-size: 22px;">
                                     <i class="fas fa-user-shield"></i>
                                 </div>
-                                <span class="category-pill bg-primary text-white mb-2 mx-auto">ADMIN ACCESS</span>
-                                <h5 class="mb-2 fw-bold">Admin Quarantine</h5>
-                                <p class="text-muted small mb-2">Administrators can review logged detections and adjust model confidence scores.</p>
-                                <a href="{{ url_for('admin_login') }}" class="small fw-bold text-primary">Access Admin Login &rarr;</a>
+                                <span class="category-pill bg-primary text-white mb-2 mx-auto">SECURITY OPS</span>
+                                <h5 class="mb-2 fw-bold">Threat Quarantine</h5>
+                                <p class="text-muted small mb-2">Automated system reviews logged detections and adjusts
+                                    model confidence scores.</p>
+                                <a href="{{ url_for('login') }}" class="small fw-bold text-primary">Access Secure
+                                    Portal &rarr;</a>
                             </div>
                         </div>
 
@@ -501,7 +532,8 @@
                         <h1 class="text-white">PhishGuard<span class="text-primary">.</span>AI</h1>
                     </a>
                     <p class="mb-0">
-                        We empower individuals and organizations to detect online fraud, avoid credential theft, and interact safely with links on the internet.
+                        We empower individuals and organizations to detect online fraud, avoid credential theft, and
+                        interact safely with links on the internet.
                     </p>
                 </div>
                 <div class="col-md-6 col-lg-3">
@@ -509,7 +541,6 @@
                     <a class="btn btn-link text-white-50" href="{{ url_for('index') }}">Home</a>
                     <a class="btn btn-link text-white-50" href="{{ url_for('history') }}">History</a>
                     <a class="btn btn-link text-white-50" href="{{ url_for('result') }}">Scan Engine</a>
-                    <a class="btn btn-link text-white-50" href="{{ url_for('login') }}">Login</a>
                 </div>
             </div>
         </div>
@@ -599,4 +630,5 @@
     </script>
 
 </body>
+
 </html>
