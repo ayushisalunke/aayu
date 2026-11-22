@@ -704,18 +704,6 @@
                 </a>
             </li>
             <li class="sidebar-link-item">
-                <a href="{{ url_for('admin_dashboard', tab='predictions') }}" class="sidebar-nav-link {% if active_tab == 'predictions' %}active{% endif %}">
-                    <i class="fas fa-shield-virus"></i>
-                    <span>Predictions</span>
-                </a>
-            </li>
-            <li class="sidebar-link-item">
-                <a href="{{ url_for('admin_dashboard', tab='enquiries') }}" class="sidebar-nav-link {% if active_tab == 'enquiries' %}active{% endif %}">
-                    <i class="fas fa-question-circle"></i>
-                    <span>Enquiries</span>
-                </a>
-            </li>
-            <li class="sidebar-link-item">
                 <a href="{{ url_for('admin_dashboard', tab='contacts') }}" class="sidebar-nav-link {% if active_tab == 'contacts' %}active{% endif %}">
                     <i class="fas fa-envelope"></i>
                     <span>Contacts</span>
@@ -806,16 +794,6 @@
             </div>
 
             <div class="stat-box">
-                <div class="stat-icon-wrap" style="color: #34D399;">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div class="stat-info">
-                    <div class="stat-number">{{ total_predictions }}</div>
-                    <div class="stat-title">Predictions</div>
-                </div>
-            </div>
-
-            <div class="stat-box">
                 <div class="stat-icon-wrap" style="color: #F87171;">
                     <i class="fas fa-envelope-open-text"></i>
                 </div>
@@ -840,7 +818,7 @@
                     <i class="fas fa-file-alt"></i>
                 </div>
                 <div class="stat-info">
-                    <div class="stat-number">4</div>
+                    <div class="stat-number">3</div>
                     <div class="stat-title">System Modules</div>
                 </div>
             </div>
@@ -848,14 +826,8 @@
 
         <!-- Horizontal Tabs Navigation Bar -->
         <div class="tabs-nav-bar">
-            <a href="{{ url_for('admin_dashboard', tab='predictions') }}" class="tab-btn {% if active_tab == 'predictions' %}active{% endif %}">
-                <span>🏠 Predictions</span>
-            </a>
             <a href="{{ url_for('admin_dashboard', tab='users') }}" class="tab-btn {% if active_tab == 'users' or not active_tab or active_tab == 'dashboard' %}active{% endif %}">
                 <span>👥 Users</span>
-            </a>
-            <a href="{{ url_for('admin_dashboard', tab='enquiries') }}" class="tab-btn {% if active_tab == 'enquiries' %}active{% endif %}">
-                <span>🏡 Enquiries</span>
             </a>
             <a href="{{ url_for('admin_dashboard', tab='contacts') }}" class="tab-btn {% if active_tab == 'contacts' %}active{% endif %}">
                 <span>📬 Contacts</span>
